@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import GridItem from '../../common/GirdItem';
 
 function GridSection(props) {
     return (
         <StyledGridSection>
-            grid section
+            <GridItem />
+            <GridItem />
+            <GridItem />
+            <GridItem />
+            <GridItem />
         </StyledGridSection>
     );
 }
