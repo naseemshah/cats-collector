@@ -18,7 +18,7 @@ let StyledGridItem = styled.div`
     align-items: center;
     background-color: antiquewhite;
     border-radius: 10px;
-    width: 250px;
+    /* width: 30%; */
     padding: 10px;
     box-shadow: 0px 2px 50px rgba(0,0,0,0.2);
     cursor: grab;
@@ -27,9 +27,10 @@ let StyledGridItem = styled.div`
         border-radius: 10px;
         width: 100%;
         pointer-events: none;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
     }
     p{
-        margin: 10px 0;
+        margin: 5px 0 0 0;
         padding: 0;
         text-transform: uppercase;
         text-align: center;
@@ -40,5 +41,7 @@ let StyledGridItem = styled.div`
         background-color: #9b5e02;
         color: white;
         transition: all 0.3s ease-in-out;
+        transform: scale(1.05);
+        box-shadow: 0px 15px 50px rgba(0,0,0,0.6);
     }
 `

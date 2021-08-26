@@ -17,6 +17,9 @@ function GridSection(props) {
 export default GridSection;
 
 let StyledGridSection = styled.section`
-
-
+    display: grid;
+    margin: 20px 0;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 50px;
+    justify-content: space-between;
 `
