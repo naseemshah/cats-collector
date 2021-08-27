@@ -2,14 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import GridItem from '../../common/GirdItem';
 
+import catsData from '../../../data/cats.json';
+
 function GridSection(props) {
     return (
         <StyledGridSection>
-            <GridItem />
-            <GridItem />
-            <GridItem />
-            <GridItem />
-            <GridItem />
+            {
+                catsData.map((cat,id)=>{
+                    return( 
+                        <GridItem
+                            key={id}
+                            catName={cat.title}
+                        />
+                    )
+                })
+            }
         </StyledGridSection>
     );
 }
