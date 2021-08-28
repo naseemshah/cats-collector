@@ -13,6 +13,7 @@ function GridSection(props) {
                         <GridItem
                             key={id}
                             catName={cat.title}
+                            imageUrl={cat.imageUrl}
                         />
                     )
                 })

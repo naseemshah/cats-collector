@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import LoadingSpinner from '../common/LoadingSpinner'
 import closeIcon from '../../assets/img/close-icon.svg'
 
-function GridItem({catName}) {
+function GridItem({catName,imageUrl}) {
     let [showModal,setShowModal] = useState(false)
+    let [hasImageLoaded,setHasImageLoaded] = useState(false)
     
     let handleOnClickModal=()=>{
         setShowModal(true);
     }
-
     let handleModalCloseBtn=()=>{
         setShowModal(false)
+    }
+    let onImageLoad =(e)=>{
+        console.log(e);
+        setHasImageLoaded(true)
     }
 
     useEffect(()=>{
@@ -24,13 +28,22 @@ function GridItem({catName}) {
             document.removeEventListener("keydown", ()=>{}, false);
         }
     },[showModal])
-    
+
     return (
         <>
             <StyledGridItem
                 onClick={handleOnClickModal}
             >
-                <img src="/cat-photos/cat-1.jpg" alt="" />
+                <div className="image-container">
+                    {!hasImageLoaded && <LoadingSpinner className="image-loading-spinner" />}
+                    <img
+                        // style={{visibility: hasImageLoaded ? "visible" : "hidden"}}
+                        className="grid-item-image"
+                        src={imageUrl}
+                        alt=""
+                        onLoad={onImageLoad}
+                    />
+                </div>
                 <p>{catName}</p>
             </StyledGridItem>
             {
@@ -63,12 +76,26 @@ let StyledGridItem = styled.div`
     box-shadow: 0px 2px 50px rgba(0,0,0,0.2);
     cursor: grab;
     transition: all 0.3s ease-in-out;
-    img{
-        border-radius: 10px;
+    .image-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 100%;
+        min-height: 100px;
+        border-radius: 10px;
         pointer-events: none;
+        background-color: white;
         box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+        overflow: hidden;
         cursor: pointer;
+        .image-loading-spinner{
+            width: 50px;
+            z-index: 50;
+        }
+        .grid-item-image{
+            width: 100%;
+        }
         :hover{
             transform: scale(1.02);
         }
@@ -110,7 +137,8 @@ let StyledModal = styled.div`
         cursor: pointer;    
     }
     .modal-image{
-        height: 80vh;
+        max-width: 80%;
+        max-height: 80vh;
         border-radius: 10px;
     }
 `
