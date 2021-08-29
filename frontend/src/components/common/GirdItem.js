@@ -54,7 +54,7 @@ function GridItem({catName,imageUrl}) {
                         src={closeIcon}
                         onClick={handleModalCloseBtn}
                         alt="" />
-                    <img className="modal-image" src="/cat-photos/cat-1.jpg" alt="" />
+                    <img className="modal-image" src={imageUrl} alt="" />
                 </StyledModal>
             }
         </>
