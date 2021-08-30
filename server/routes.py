@@ -22,10 +22,24 @@ async def get_cats(request):
                 }
                 for result in stmt
             ]
-        print(results)
         return JSONResponse(results)
+
+async def update_cats(request):
+    latest_cats = await request.json()
+    print(latest_cats)
+    try:
+        with Session(engine) as session:
+            session.add(Cats)  
+            session.commit()  
+            session.refresh(Cats)  
+            print("Updated Cats:", Cats)
+    except Exception as e:
+        print("Error", e)
+        return PlainTextResponse("Error")
+    return PlainTextResponse("results")
 
 api_routes=[
     Route('/', api_welcome_message),
     Route('/cats', get_cats),
+    Route('/updateCats', update_cats, methods=['POST']),
 ]
