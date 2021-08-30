@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import GridItem from '../../common/GirdItem';
 
-import catsData from '../../../data/cats.json';
 
-function GridSection(props) {
+function GridSection({catsData}) {
     return (
         <StyledGridSection>
             {
