@@ -21,16 +21,9 @@ _(remaining features will be updated as new fetures get populated.)_
 ```project-folder/
 ├─ server/
 ├─ frontend/
-│  ├─ node_modules/
-│  ├─ public/
-│  ├─ src/
-│  ├─ .gitignore
-│  ├─ package.json
-│  ├─ README.md
-│  ├─ yarn.lock
 ```
 Has 2 main folders: 
-- `server` which has a flask application.
+- `server` which has a starlett(`python`) with uvicorn server.
 - `frontend` which has a React application.
 
 ## Setting up Frontend development environment.
@@ -43,4 +36,46 @@ The `frontend` project was set up using `yarn` package manager. Make sure you ha
 
 ## Setting up Backend application.
 
-_(serverside application developement yet to be started)_
+The backend API with Starlett with uvicorn server.
+Below are the steps to setup the backend server.
+
+
+### Activate virtual environment
+
+This project uses python's venv to manage
+dependencies and environment.
+
+#### In windows 
+
+If you are using `cmd`:
+
+```
+cd server
+.\venv\Scripts\activate.bat
+```
+
+If you are using Powershell or Windows Terminal:
+
+```
+cd server
+.\venv\Scripts\activate.psl
+```
+
+#### In Mac/Linux 
+
+```
+cd server
+./venv/bin/activate
+```
+### Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### Run the server
+Run the following command in the shell to
+start a server in `localhost:8000`.
+```
+uvicorn server:app --reload
+```
