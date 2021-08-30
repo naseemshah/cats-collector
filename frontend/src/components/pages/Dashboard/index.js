@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { ApiContext } from '../../../contexts/ApiContext';
 import GridSection from './GridSection';
 
 function Dashboard(props) {
+    let { api } = useContext(ApiContext)
+    useEffect(()=>{
+        api.get('/cats')
+        .then( response =>{
+          console.log(response.data);
+          console.log(response.status);
+        })
+        .catch((error)=>{
+            console.log('Error', error.message);
+        });
+    },[])
     return (
         <StyledDashboard>
             <section className="dash-header">
