@@ -11,7 +11,6 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: `http://${process.env.REACT_APP_CATS_API}`,
-  headers: {"Access-Control-Allow-Origin": "*"}
 })
 
 function App() {

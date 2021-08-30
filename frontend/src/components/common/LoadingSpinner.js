@@ -1,9 +1,9 @@
 import React from "react";
 
-function LoadingSpinner() {
+function LoadingSpinner({className}) {
   return (
     <svg
-        className="image-loading-spinner"
+        className={className ? className : "image-loading-spinner"}
         xmlns="http://www.w3.org/2000/svg"
         style={{ margin: "auto", background: "none" }}
         width="200"
