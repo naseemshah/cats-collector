@@ -16,21 +16,21 @@ If you are using `cmd`:
 
 ```
 cd server
-.\env\Scripts\activate.bat
+.\venv\Scripts\activate.bat
 ```
 
 If you are using Powershell or Windows Terminal:
 
 ```
 cd server
-.\env\Scripts\activate.psl
+.\venv\Scripts\activate.psl
 ```
 
 ### In Mac/Linux 
 
 ```
 cd server
-./env/bin/activate
+./venv/bin/activate
 ```
 ## Install dependencies
 
