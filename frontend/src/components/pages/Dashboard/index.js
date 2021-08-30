@@ -21,7 +21,7 @@ function Dashboard(props) {
             setIsCatsDataLoading(false)
             console.log('Error', error.message);
         });
-    },[])
+    },[api])
     return (
         <StyledDashboard>
             <section className="dash-header">
