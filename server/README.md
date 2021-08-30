@@ -2,7 +2,8 @@
 This documentation contains all the necessary
 details of backend application.  
 
-The backend server has
+The backend API with Starlett with uvicorn server.
+Below are the steps to setup the backend server.
 
 
 ## Activate virtual environment
@@ -36,4 +37,11 @@ cd server
 
 ```
 pip install -r requirements.txt
+```
+
+## Run the server
+Run the following command in the shell to
+start a server in `localhost:8000`.
+```
+uvicorn server:app --reload
 ```
