@@ -2,18 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ApiContext } from '../../../contexts/ApiContext';
 import LoadingSpinner from '../../common/LoadingSpinner';
-import GridSection from './GridSection';
+import GridSection from './GridSection.js';
 
 function Dashboard(props) {
     let { api } = useContext(ApiContext)
     let [catsData,setCatsData] = useState([])
     let [isCatsDataLoading,setIsCatsDataLoading]=useState(true)
+
     useEffect(()=>{
         setIsCatsDataLoading(true)
         api.get('/cats')
         .then( ({data,status}) =>{
-          console.log(data);
-          console.log(status);
           setCatsData(data);
           setIsCatsDataLoading(false)
         })
@@ -22,6 +21,7 @@ function Dashboard(props) {
             console.log('Error', error.message);
         });
     },[api])
+
     return (
         <StyledDashboard>
             <section className="dash-header">
@@ -43,7 +43,7 @@ function Dashboard(props) {
     );
 }
 
-export default Dashboard  ;
+export default Dashboard;
 
 let StyledDashboard = styled.div`
     width: 80vw;
