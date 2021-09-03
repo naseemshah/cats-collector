@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import GridItem from '../../common/GirdItem';
+import GridItem from './GirdItem';
 
 
 function GridSection({catsData}) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import LoadingSpinner from '../common/LoadingSpinner'
-import closeIcon from '../../assets/img/close-icon.svg'
+import LoadingSpinner from '../../common/LoadingSpinner'
+import closeIcon from '../../../assets/img/close-icon.svg'
 
 function GridItem({catName,imageUrl}) {
     let [showModal,setShowModal] = useState(false)
