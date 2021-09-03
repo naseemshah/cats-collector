@@ -6,6 +6,7 @@ import {
 
 import HomePage from './components/pages/Home';
 import Dashboard from './components/pages/Dashboard';
+import Dash2 from './components/pages/Dash2'
 import { ApiContext } from "./contexts/ApiContext";
 import axios from "axios";
 
@@ -20,6 +21,9 @@ function App() {
     <Router>
       <ApiContext.Provider value={{ api }}>
         <Switch>
+          <Route path="/dash2">
+            <Dash2 />
+          </Route>
           <Route path="/dash">
             <Dashboard />
           </Route>
