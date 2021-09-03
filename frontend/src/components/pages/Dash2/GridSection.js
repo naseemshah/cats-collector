@@ -4,7 +4,7 @@ import {
     GridDropZone,
     GridItem,
     swap
-  } from "react-grid-drag";
+} from "react-grid-drag";
 import catsData from '../../../data/cats.json'
 import CatGirdItem from './CatGirdItem';
 import closeIcon from '../../../assets/img/close-icon.svg';
@@ -18,14 +18,10 @@ function GridSection() {
       setCurrentModalData(null)
     }
     
-    // target id will only be set if dragging from one dropzone to another.
     let onDragChange = (sourceId, sourceIndex, targetIndex, targetId) => {
       console.log(sourceIndex);
       console.log(targetIndex);
       let currentCats = cats;
-      // if(targetIndex===currentCats.length) targetIndex = targetIndex-1  
-      // if(currentCats[targetIndex]) currentCats[targetIndex].position = sourceIndex;
-      // if(currentCats[sourceIndex]) currentCats[sourceIndex].position = targetIndex;
       const nextState = swap(currentCats, sourceIndex, targetIndex);
       nextState.forEach((element,id) => {
         element.position = id;
@@ -53,30 +49,33 @@ function GridSection() {
           rowHeight={400}
           style={{ height: "400px" }}
         >
-          {cats.map((cat,id) => (
-            <GridItem key={id}>
-              <CatGirdItem
-                setCurrentModalData={setCurrentModalData}
-                catData={cat} 
-              />
-            </GridItem>
-          ))}
-        </GridDropZone>
           {
-            currentModalData && 
-            <StyledModal className="image-modal">
-              <img 
-                  className="modal-close-icon"
-                  src={closeIcon}
-                  onClick={handleModalCloseBtn}
-                  alt="" />
-              <img 
-                className="modal-image"
-                src={currentModalData.imageUrl}
-                alt=""
-              />
-            </StyledModal>
+            cats.map((cat) => (
+              <GridItem key={cat.type}>
+                <CatGirdItem
+                  setCurrentModalData={setCurrentModalData}
+                  catData={cat} 
+                />
+              </GridItem>
+            ))
           }
+        </GridDropZone>
+        {
+          currentModalData && 
+          <StyledModal className="image-modal">
+            <img 
+                className="modal-close-icon"
+                src={closeIcon}
+                onClick={handleModalCloseBtn}
+                alt=""
+            />
+            <img 
+              className="modal-image"
+              src={currentModalData.imageUrl}
+              alt=""
+            />
+          </StyledModal>
+        }
       </GridContextProvider>
     );
   }

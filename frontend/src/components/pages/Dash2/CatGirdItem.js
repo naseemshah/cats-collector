@@ -1,36 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LoadingSpinner from '../../common/LoadingSpinner';
+import maximizeIcon from '../../../assets/img/maximize.svg';
 
 function CatGirdItem({catData,setCurrentModalData}) {
     let [hasImageLoaded,setHasImageLoaded] = useState(false)
     
     let onImageLoad =(e)=>{
-        console.log(e);
         setHasImageLoaded(true)
     }
-    
+
     let handleOnClickModal=()=>{
         setCurrentModalData(catData);
     }
-    
 
     return (
         <>
             <StyledCatGirdItem
-                onClick={handleOnClickModal}
+                
             >
+                <div
+                    className="grid-item-fullscreen"
+                    onClick={handleOnClickModal}
+                >
+                    <img
+                        src={maximizeIcon}
+                        alt=""
+                    />
+                </div>
                 <div className="image-container">
                     {!hasImageLoaded && <LoadingSpinner className="image-loading-spinner" />}
                     <img
-                        // style={{visibility: hasImageLoaded ? "visible" : "hidden"}}
                         className="grid-item-image"
                         src={catData.imageUrl}
                         alt=""
                         onLoad={onImageLoad}
                     />
                 </div>
-                <p>{catData.catName}</p>
+                <p>{catData.title}</p>
             </StyledCatGirdItem>
             
         </>
@@ -43,6 +50,7 @@ export default CatGirdItem;
 
 let StyledCatGirdItem = styled.div`
     /* height: 400px; */
+    position: relative;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -55,6 +63,30 @@ let StyledCatGirdItem = styled.div`
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     user-select: none;
+
+    .grid-item-fullscreen{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 25px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: #ffffffd3;
+        padding: 10px;
+        z-index: 10;
+        transition: all 0.3s ease-in-out;
+        img{
+            width: 100%;
+        }
+        :hover{
+            transform: scale(1.2);
+            transition: all 0.3s ease-in-out;
+        }
+    }
     .image-container{
         display: flex;
         flex-direction: column;
@@ -75,6 +107,7 @@ let StyledCatGirdItem = styled.div`
         .grid-item-image{
             width: 100%;
         }
+        
         :hover{
             transform: scale(1.02);
         }
@@ -86,8 +119,9 @@ let StyledCatGirdItem = styled.div`
         text-align: center;
         font-weight: 800;
         pointer-events: none;
-    }
-    
+        user-select: none;
+
+    }    
     :hover{
         background-color: #9b5e02;
         color: white;
