@@ -1,62 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import LoadingSpinner from '../../common/LoadingSpinner'
-import closeIcon from '../../../assets/img/close-icon.svg'
+import LoadingSpinner from '../../common/LoadingSpinner';
 
-function CatGirdItem({catName,imageUrl}) {
-    let [showModal,setShowModal] = useState(false)
+function CatGirdItem({catData,setCurrentModalData}) {
     let [hasImageLoaded,setHasImageLoaded] = useState(false)
     
-    let handleOnClickModal=()=>{
-        setShowModal(true);
-    }
-    let handleModalCloseBtn=()=>{
-        setShowModal(false)
-    }
     let onImageLoad =(e)=>{
         console.log(e);
         setHasImageLoaded(true)
     }
-
-    useEffect(()=>{
-        window.addEventListener("keydown",(e)=>{
-            if(e.key === "Escape"){
-                setShowModal(false)
-            }
-        },false)
-        return ()=>{
-            document.removeEventListener("keydown", ()=>{}, false);
-        }
-    },[showModal])
+    
+    let handleOnClickModal=()=>{
+        setCurrentModalData(catData);
+    }
+    
 
     return (
         <>
             <StyledCatGirdItem
-                // onClick={handleOnClickModal}
+                onClick={handleOnClickModal}
             >
                 <div className="image-container">
                     {!hasImageLoaded && <LoadingSpinner className="image-loading-spinner" />}
                     <img
                         // style={{visibility: hasImageLoaded ? "visible" : "hidden"}}
                         className="grid-item-image"
-                        src={imageUrl}
+                        src={catData.imageUrl}
                         alt=""
                         onLoad={onImageLoad}
                     />
                 </div>
-                <p>{catName}</p>
+                <p>{catData.catName}</p>
             </StyledCatGirdItem>
-            {/* {
-                showModal && 
-                <StyledModal className="image-modal">
-                    <img 
-                        className="modal-close-icon"
-                        src={closeIcon}
-                        onClick={handleModalCloseBtn}
-                        alt="" />
-                    <img className="modal-image" src={imageUrl} alt="" />
-                </StyledModal>
-            } */}
+            
         </>
     );
 }
@@ -76,7 +52,7 @@ let StyledCatGirdItem = styled.div`
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0px 2px 50px rgba(0,0,0,0.2);
-    cursor: grab;
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
     user-select: none;
     .image-container{
@@ -121,27 +97,3 @@ let StyledCatGirdItem = styled.div`
     }
 `
 
-let StyledModal = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50vw;
-    padding: 10px 10px 20px 10px;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    transform: translate(-50%,-50%);
-    z-index: 555;
-    .modal-close-icon{
-        margin: 10px 0 10px auto;
-        width: 25px;
-        cursor: pointer;    
-    }
-    .modal-image{
-        max-width: 80%;
-        max-height: 80vh;
-        border-radius: 10px;
-    }
-`
