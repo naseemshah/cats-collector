@@ -68,8 +68,8 @@ let StyledCatGirdItem = styled.div`
         position: absolute;
         top: 20px;
         right: 20px;
-        width: 25px;
-        height: 30px;
+        width: 2vw;
+        height: 2vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -93,6 +93,7 @@ let StyledCatGirdItem = styled.div`
         justify-content: center;
         align-items: center;
         width: 100%;
+        max-height: 320px;
         min-height: 100px;
         border-radius: 10px;
         pointer-events: none;
@@ -117,10 +118,11 @@ let StyledCatGirdItem = styled.div`
         padding: 0;
         text-transform: uppercase;
         text-align: center;
+        font-size: 1.1rem;
         font-weight: 800;
         pointer-events: none;
         user-select: none;
-
+        white-space: nowrap;
     }    
     :hover{
         background-color: #9b5e02;
@@ -128,6 +130,16 @@ let StyledCatGirdItem = styled.div`
         transition: all 0.3s ease-in-out;
         transform: scale(1.05);
         box-shadow: 0px 15px 50px rgba(0,0,0,0.6);
+    }
+    @media only screen and (max-width: 600px){
+        p{
+            font-size: 15px;
+        }
+        .grid-item-fullscreen{
+            padding: 5px;
+            width: 3vw;
+            height: 3vw;
+        }
     }
 `
 

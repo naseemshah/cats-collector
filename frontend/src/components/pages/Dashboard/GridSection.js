@@ -11,7 +11,9 @@ import closeIcon from '../../../assets/img/close-icon.svg';
 import styled from 'styled-components';
   
 function GridSection() {
-    const [cats, setCats] = useState(catsData); // supply your own state
+    const [cats, setCats] = useState(catsData);
+    let [gridHeight,setGridHeight] = useState(400)
+    let [gridColumns,setGridColumns] = useState(3)
     let [currentModalData,setCurrentModalData] = useState(null)
   
     let handleModalCloseBtn=()=>{
@@ -28,6 +30,28 @@ function GridSection() {
       setCats(nextState);
     }
 
+    let onWindowResize = (e) => {
+      let width = e.target.innerWidth;
+      if(width>1100){
+        setGridHeight(400)
+      }
+      else if(width<1100 && width>800){
+        setGridHeight(320)
+      }
+      else if(width<800 && width>600){
+        setGridHeight(230)
+        setGridColumns(3)
+      }
+      else if(width<600 && width>450){
+        setGridColumns(2)
+        setGridHeight(255)
+      }
+      else if(width<450){
+        setGridHeight(200)
+      }
+
+    }
+
     useEffect(()=>{
       window.addEventListener("keydown",(e)=>{
           if(e.key === "Escape"){
@@ -39,13 +63,20 @@ function GridSection() {
       }
     },[currentModalData])
 
+    useEffect(()=>{
+      window.addEventListener("resize",onWindowResize,false)
+      return ()=>{
+        window.removeEventListener("resize",onWindowResize,false)
+      }
+    },[])
+
     return (
       <GridContextProvider onChange={onDragChange}>
         <GridDropZone
           id="cats-grid-dropzone"
-          boxesPerRow={3}
-          rowHeight={400}
-          style={{ height: "400px" }}
+          boxesPerRow={gridColumns}
+          rowHeight={gridHeight}
+          // style={{ height: "fit-content" }}
         >
           {
             cats.map((cat) => (
