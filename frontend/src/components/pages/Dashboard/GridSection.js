@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
     GridContextProvider,
     GridDropZone,
@@ -29,9 +29,8 @@ function GridSection() {
       console.log(nextState);
       setCats(nextState);
     }
-
-    let onWindowResize = (e) => {
-      let width = e.target.innerWidth;
+    
+    let setGridSettings = (width) =>{
       if(width>1100){
         setGridHeight(400)
       }
@@ -49,8 +48,12 @@ function GridSection() {
       else if(width<450){
         setGridHeight(200)
       }
-
     }
+
+    let onWindowResize = useCallback((e) => {
+      let width = e.target.innerWidth;
+      setGridSettings(width);
+    },[])
 
     useEffect(()=>{
       window.addEventListener("keydown",(e)=>{
@@ -64,11 +67,12 @@ function GridSection() {
     },[currentModalData])
 
     useEffect(()=>{
+      setGridSettings(window.innerWidth)
       window.addEventListener("resize",onWindowResize,false)
       return ()=>{
         window.removeEventListener("resize",onWindowResize,false)
       }
-    },[])
+    },[onWindowResize])
 
     return (
       <GridContextProvider onChange={onDragChange}>
@@ -76,7 +80,7 @@ function GridSection() {
           id="cats-grid-dropzone"
           boxesPerRow={gridColumns}
           rowHeight={gridHeight}
-          // style={{ height: "fit-content" }}
+          style={{ height: `${gridHeight}px` }}
         >
           {
             cats.map((cat) => (
