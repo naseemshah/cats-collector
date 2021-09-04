@@ -20,7 +20,7 @@ cd server
 .\venv\Scripts\activate.bat
 ```
 
-If you are using Powershell or Windows Terminal:
+If you are using `Powershell` or `Windows Terminal`:
 
 ```
 cd server

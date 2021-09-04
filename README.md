@@ -13,7 +13,7 @@ _(remaining features will be updated as new fetures get populated.)_
 ## Tech Stack
 
 - Frontend: Reach.js
-- Backend: Flask
+- Backend: Starlett
 - Database: PostgreSQL
 
 ## Folder Structure
@@ -32,6 +32,13 @@ The `frontend` project was set up using `yarn` package manager. Make sure you ha
 
 - Navigate to `frontend` folder by: `cd frontend`.
 - Install the dependencies:  `yarn install`.
+- Create a .env file: 
+
+```
+
+REACT_APP_CATS_API=localhost:8000
+
+```
 - Start the development server `yarn start`.
 
 ## Setting up Backend application.
@@ -58,7 +65,7 @@ If you are using Powershell or Windows Terminal:
 
 ```
 cd server
-.\venv\Scripts\activate.psl
+.\venv\Scripts\activate.ps1
 ```
 
 #### In Mac/Linux 
