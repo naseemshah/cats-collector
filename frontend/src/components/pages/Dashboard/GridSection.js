@@ -80,7 +80,7 @@ function GridSection() {
           id="cats-grid-dropzone"
           boxesPerRow={gridColumns}
           rowHeight={gridHeight}
-          // style={{ height: "fit-content" }}
+          style={{ height: `${gridHeight}px` }}
         >
           {
             cats.map((cat) => (
