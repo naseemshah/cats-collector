@@ -8,5 +8,11 @@ The `frontend` project was set up using `yarn` package manager. Make sure you ha
 
 - Navigate to `frontend` folder by: `cd frontend`.
 - Install the dependencies:  `yarn install`.
-- Start the development server `yarn start`.
+- Create a .env file: 
 
+```
+
+REACT_APP_CATS_API=localhost:8000
+
+```
+- Start the development server `yarn start`.
