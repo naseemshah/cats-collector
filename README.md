@@ -2,7 +2,6 @@
 A simple fullstack application that allows you 
 to collect Cat pictures in a grid of cards.
 
-`[Screenshot of final application. Project in progress.]`
 
 ## Features
 - Ability to Drag and drop _Cat Cards_ to reorder 
@@ -12,11 +11,12 @@ pictures.
 
 ![Cats Collector](./preview.gif)
 
+
 ## Tech Stack
 
 - Frontend: Reach.js
 - Backend: Starlett
-- Database: PostgreSQL
+- Database: Sqlite
 
 ## Folder Structure
 
