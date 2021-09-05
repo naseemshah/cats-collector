@@ -10,7 +10,7 @@ import { ApiContext } from "./contexts/ApiContext";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: `http://${process.env.REACT_APP_CATS_API}`,
+  baseURL: `http://${process.env.REACT_APP_CATS_API}`
 })
 
 function App() {
