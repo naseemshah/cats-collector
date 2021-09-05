@@ -16,10 +16,8 @@ function Dashboard(props) {
         .then( ({data,status}) =>{
             setLastUpdatedTime(new Date().toLocaleString())
             setHasChanges(false)
-            console.log("asvef");
         })
         .catch((error)=>{
-            console.log('Error', error.message);
             setLastUpdatedTime("Auto-update Failed.")
         });
     },[api,catsData])
@@ -46,8 +44,6 @@ function Dashboard(props) {
 
     useEffect(()=>{
         let autoSaveTimer = setInterval(()=>{
-            console.log("time");
-            console.log(hasChanges);
             if(hasChanges){
                 updateCatsToAPI()
             }
