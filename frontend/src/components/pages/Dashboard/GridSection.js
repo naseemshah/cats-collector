@@ -5,13 +5,11 @@ import {
     GridItem,
     swap
 } from "react-grid-drag";
-import catsData from '../../../data/cats.json'
 import CatGirdItem from './CatGirdItem';
 import closeIcon from '../../../assets/img/close-icon.svg';
 import styled from 'styled-components';
   
-function GridSection() {
-    const [cats, setCats] = useState(catsData);
+function GridSection({ catsData, setCatsData, hasChanges, setHasChanges}) {
     let [gridHeight,setGridHeight] = useState(400)
     let [gridColumns,setGridColumns] = useState(3)
     let [currentModalData,setCurrentModalData] = useState(null)
@@ -21,39 +19,41 @@ function GridSection() {
     }
     
     let onDragChange = (sourceId, sourceIndex, targetIndex, targetId) => {
-      let currentCats = cats;
+      let currentCats = catsData;
       const nextState = swap(currentCats, sourceIndex, targetIndex);
       nextState.forEach((element,id) => {
         element.position = id;
       });
-      console.log(nextState);
-      setCats(nextState);
+      setCatsData(nextState);
+      if(sourceIndex>=0 && targetIndex>=0) setHasChanges(true)
     }
     
-    let setGridSettings = (width) =>{
+    let setGridSettings = useCallback((width) =>{
       if(width>1100){
         setGridHeight(400)
+        if(gridColumns!==3) setGridColumns(3)
       }
       else if(width<1100 && width>800){
         setGridHeight(320)
+        if(gridColumns!==3) setGridColumns(3)
       }
       else if(width<800 && width>600){
         setGridHeight(230)
-        setGridColumns(3)
+        if(gridColumns!==3) setGridColumns(3)
       }
       else if(width<600 && width>450){
-        setGridColumns(2)
+        if(gridColumns!==2) setGridColumns(2)
         setGridHeight(255)
       }
       else if(width<450){
         setGridHeight(200)
       }
-    }
+    },[gridColumns])
 
     let onWindowResize = useCallback((e) => {
       let width = e.target.innerWidth;
       setGridSettings(width);
-    },[])
+    },[setGridSettings])
 
     useEffect(()=>{
       window.addEventListener("keydown",(e)=>{
@@ -72,7 +72,7 @@ function GridSection() {
       return ()=>{
         window.removeEventListener("resize",onWindowResize,false)
       }
-    },[onWindowResize])
+    },[onWindowResize,setGridSettings])
 
     return (
       <GridContextProvider onChange={onDragChange}>
@@ -83,7 +83,7 @@ function GridSection() {
           style={{ height: `${gridHeight}px` }}
         >
           {
-            cats.map((cat) => (
+            catsData.map((cat) => (
               <GridItem key={cat.type}>
                 <CatGirdItem
                   setCurrentModalData={setCurrentModalData}
