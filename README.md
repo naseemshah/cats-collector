@@ -7,8 +7,10 @@ to collect Cat pictures in a grid of cards.
 ## Features
 - Ability to Drag and drop _Cat Cards_ to reorder 
 pictures.
+- Auto saves every 5 seconds if any changes has been made.
+- View enlarged view. 
 
-_(remaining features will be updated as new fetures get populated.)_
+![Cats Collector](./preview.gif)
 
 ## Tech Stack
 
