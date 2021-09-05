@@ -4,7 +4,8 @@ from sqlmodel import Field, Relationship, SQLModel
 
 
 class Cats(SQLModel, table=True):
-    position: int = Field(default=None, primary_key=True)
+    id: str = Field(default=None, primary_key=True)
+    position: int
     type: str
     title: str
     imageUrl: str

@@ -15,6 +15,7 @@ async def get_cats(request):
         stmt = session.exec(select(Cats)).all()
         results = [
                 {
+                "id": result.id,
                 "position": result.position,
                 "title":    result.title,
                 "type":     result.type,
@@ -24,15 +25,22 @@ async def get_cats(request):
             ]
         return JSONResponse(results)
 
+
 async def update_cats(request):
-    latest_cats = await request.json()
-    print(latest_cats)
+    response = await request.json()
     try:
         with Session(engine) as session:
-            session.add(Cats)  
-            session.commit()  
-            session.refresh(Cats)  
-            print("Updated Cats:", Cats)
+            for updated_cat in response:
+                stmt = select(Cats).where(Cats.id == updated_cat['id'])
+                results = session.exec(stmt)
+                cat = results.one()
+                cat.position = updated_cat['position']
+                cat.title = updated_cat['title']
+                cat.type = updated_cat['type']
+                cat.imageUrl = updated_cat['imageUrl']
+                session.add(cat)
+                session.commit()
+                session.refresh(cat)
     except Exception as e:
         print("Error", e)
         return PlainTextResponse("Error")
