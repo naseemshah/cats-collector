@@ -28,6 +28,8 @@ Has 2 main folders:
 - `server` which has a starlett(`python`) with uvicorn server.
 - `frontend` which has a React application.
 
+# Setting Development Enviornment
+
 ## Setting up Frontend development environment.
 
 The `frontend` project was set up using `yarn` package manager. Make sure you have you have `Node.js` and `yarn` installed.
@@ -87,4 +89,19 @@ Run the following command in the shell to
 start a server in `localhost:8000`.
 ```
 uvicorn server:app --reload
+```
+
+# Production Build and Docker Container
+
+This Project uses docker to containerise both frontend and backend applications.
+
+## Building Frontend Image alone.
+
+### Build container image
+```
+docker build -f Dockerfile.prod -t cats-collector-fe-image:latest .
+```
+### Run the Image
+```
+docker run -it -p 3000:80 --rm cats-collector-fe-image:latest
 ```
