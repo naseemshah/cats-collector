@@ -12,7 +12,8 @@ The `frontend` project was set up using `yarn` package manager. Make sure you ha
 
 ```
 
-REACT_APP_CATS_API=localhost:8000
+REACT_APP_CATS_API_DEV=localhost:8000
+REACT_APP_CATS_API_PRO=localhost:8000
 
 ```
 - Start the development server `yarn start`.

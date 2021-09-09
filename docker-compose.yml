@@ -1,0 +1,18 @@
+version: '3'
+services: 
+  cats-collector-frontend:
+    image: cats-collector-frontend
+    stdin_open: true
+    ports: 
+      - "3000:80"
+    depends_on:
+      - cats-collector-backend
+    networks: 
+      - cats-collector-network
+  cats-collector-backend:
+    image: cats-collector-backend
+    ports: 
+      - "8000:80"
+networks: 
+  cats-collector-network:
+    driver: bridge
