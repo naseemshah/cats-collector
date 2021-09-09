@@ -40,7 +40,8 @@ The `frontend` project was set up using `yarn` package manager. Make sure you ha
 
 ```
 
-REACT_APP_CATS_API=localhost:8000
+REACT_APP_CATS_API_DEV=localhost:8000
+REACT_APP_CATS_API_PRO=localhost:8000
 
 ```
 - Start the development server `yarn start`.
@@ -94,14 +95,35 @@ uvicorn server:app --reload
 # Production Build and Docker Container
 
 This Project uses docker to containerise both frontend and backend applications.
+Using `docker-compose` we run both of them as microservices.
 
-## Building Frontend Image alone.
+## Building Frontend Image.
+```
+cd frontend
+docker build -f Dockerfile.prod -t cats-collector-frontend:latest .
+```
 
-### Build container image
+## Building Backend Image.
 ```
-docker build -f Dockerfile.prod -t cats-collector-fe-image:latest .
+cd server
+docker build -t cats-collector-backend:latest .
 ```
-### Run the Image
+
+## Launch the application
 ```
-docker run -it -p 3000:80 --rm cats-collector-fe-image:latest
+cd ../
+docker-compose up
+```
+You have sucessfully launched the fullstack in production as a microservice.
+
+# Running Image saperately rather than using `docker-compose`.
+
+### Run the Frontend Image
+```
+docker run -it -p 3000:80 --rm cats-collector-frontend:latest
+```
+
+### Run the server Image
+```
+docker run -it -p 8000:80 --rm cats-collector-backend:latest
 ```
